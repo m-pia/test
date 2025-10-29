@@ -6,6 +6,8 @@
   # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.nodejs_20
+    pkgs.python3
+    pkgs.gcc
     pkgs.yarn
     pkgs.nodePackages.pnpm
     pkgs.bun
