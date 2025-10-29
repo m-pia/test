@@ -3,12 +3,6 @@
 import { useState } from "react";
 import ROSLIB from "roslib";
 
-// Define a more specific type for the messages we expect, if known.
-// For std_msgs/String, it's { data: string }.
-interface StringMessage extends ROSLIB.Message {
-  data: string;
-}
-
 export default function RosPage() {
   const [status, setStatus] = useState("Not connected");
   const [ros, setRos] = useState<ROSLIB.Ros | null>(null);
@@ -37,7 +31,6 @@ export default function RosPage() {
     });
 
     newRos.on("error", (error) => {
-      // The error object can be complex, stringifying it is a safe way to log
       log(`Error connecting to websocket server: ${JSON.stringify(error)}`);
       setStatus("Error");
     });
@@ -67,11 +60,10 @@ export default function RosPage() {
     const listener = new ROSLIB.Topic({
       ros: ros,
       name: topic,
-      messageType: "std_msgs/String", // This should match the actual message type on the ROS side
+      messageType: "std_msgs/String",
     });
 
-    // Use a more specific type for the message
-    listener.subscribe((message: StringMessage) => {
+    listener.subscribe((message: ROSLIB.Message) => {
       log(`Received message on ${listener.name}: ${JSON.stringify(message)}`);
     });
   };
