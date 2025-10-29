@@ -1,7 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import ROSLIB from "roslib";
+
+// Define a more specific type for the messages we expect, if known.
+// For std_msgs/String, it's { data: string }.
+interface StringMessage extends ROSLIB.Message {
+  data: string;
+}
 
 export default function RosPage() {
   const [status, setStatus] = useState("Not connected");
@@ -31,7 +37,8 @@ export default function RosPage() {
     });
 
     newRos.on("error", (error) => {
-      log(`Error connecting to websocket server: ${error}`);
+      // The error object can be complex, stringifying it is a safe way to log
+      log(`Error connecting to websocket server: ${JSON.stringify(error)}`);
       setStatus("Error");
     });
 
@@ -60,10 +67,11 @@ export default function RosPage() {
     const listener = new ROSLIB.Topic({
       ros: ros,
       name: topic,
-      messageType: "std_msgs/String",
+      messageType: "std_msgs/String", // This should match the actual message type on the ROS side
     });
 
-    listener.subscribe((message: any) => {
+    // Use a more specific type for the message
+    listener.subscribe((message: StringMessage) => {
       log(`Received message on ${listener.name}: ${JSON.stringify(message)}`);
     });
   };
@@ -85,8 +93,12 @@ export default function RosPage() {
       const rosMessage = new ROSLIB.Message(msgJson);
       pub.publish(rosMessage);
       log(`Published to ${topic}: ${message}`);
-    } catch (e: any) {
-      log(`Error parsing or publishing message: ${e.message}`);
+    } catch (e: unknown) {
+        if (e instanceof Error) {
+            log(`Error parsing or publishing message: ${e.message}`);
+        } else {
+            log(`An unknown error occurred during publish: ${String(e)}`);
+        }
     }
   };
 
