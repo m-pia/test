@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 타입스크립트 기반 신기술 테스트 프로젝트
 
-## Getting Started
+이 프로젝트는 타입스크립트를 기반으로 한 최신 웹 기술들을 테스트하고 학습하기 위한 공간입니다.
 
-First, run the development server:
+## ✨ 주요 기술 스택
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+이 프로젝트에서는 다음과 같은 신기술들을 사용하고 있습니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*   **Next.js 15**: 최신 버전의 Next.js 프레임워크를 사용하여 서버 사이드 렌더링, 정적 사이트 생성 등 다양한 렌더링 전략을 테스트합니다.
+    *   **Turbopack**: Rust 기반의 번들러인 Turbopack을 사용하여 개발 서버의 속도를 극대화합니다.
+*   **React 19**: React의 최신 버전인 19 버전을 사용하여 새로운 기능들을 탐색합니다.
+*   **Tailwind CSS v4**: 차세대 유틸리티 우선 CSS 프레임워크인 Tailwind CSS v4를 사용하여 빠르고 일관된 UI를 구축합니다.
+*   **TypeScript 5**: 정적 타이핑을 통해 코드의 안정성과 가독성을 높입니다.
+*   **ESLint 9**: 최신 문법을 지원하는 ESLint 9 버전을 사용하여 코드 품질을 유지합니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 시작하기
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  **의존성 설치:**
+    ```bash
+    npm install
+    ```
 
-## Learn More
+2.  **개발 서버 실행:**
+    ```bash
+    npm run dev
+    ```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3.  **프로덕션 빌드:**
+    ```bash
+    npm run build
+    ```

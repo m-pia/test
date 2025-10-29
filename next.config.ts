@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  webpack: (config, {
+    isServer
+  }) => {
+    if (isServer) {
+      config.externals = [...config.externals, "@tensorflow/tfjs-node", "@mapbox/node-pre-gyp", "nock", "aws-sdk"];
+    }
+    return config;
+  }
 };
 
 export default nextConfig;
