@@ -21,14 +21,9 @@ export default async function DemoCategoryPage({ params }: { params: { category:
 
   return (
     <div className="bg-gray-900 text-white min-h-screen">
-      <header className="bg-gray-800 shadow-md">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-white">{category} Demos</h1>
-          <Link href="/" className="text-blue-400 hover:text-blue-500">
-            &larr; Back to Home
-          </Link>
-        </div>
-      </header>
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 className="text-2xl font-bold text-white">{category} Demos</h1>
+      </div>
       <main className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {demoList.map((demo) => (

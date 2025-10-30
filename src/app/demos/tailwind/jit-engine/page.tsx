@@ -3,8 +3,8 @@ export default function TailwindJitEnginePage() {
     <div className="max-w-2xl mx-auto bg-gray-800 shadow-lg rounded-lg p-8 mt-10">
       <h1 className="text-3xl font-bold text-white mb-4">Tailwind CSS v4 JIT Engine Demo</h1>
       <p className="text-gray-400 mb-6">
-        This page demonstrates the power of Tailwind's JIT (Just-In-Time) compiler.
-        The classes below are generated on-the-fly.
+      This page demonstrates the power of Tailwind&apos;s JIT (Just-In-Time) compiler.
+      The classes below are generated on-the-fly.
       </p>
 
       <div className="space-y-4">
