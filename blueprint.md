@@ -1,29 +1,45 @@
-# 프로젝트 청사진
+# Blueprint
 
-## 개요
+## Overview
 
-이 프로젝트는 TypeScript 기반의 새로운 웹 기술을 테스트하고 학습하기 위한 Next.js 프로젝트입니다. Next.js 15, React 19, Tailwind CSS v4를 사용합니다.
+This project is a collection of demos for various web technologies, including TensorFlow.js, ROS, React, and Tailwind CSS. The goal is to provide a hands-on learning experience for developers interested in these technologies.
 
-## 구현된 기능
+## Implemented Features
 
-### 초기 설정
-- **프레임워크:** Next.js 15 (앱 라우터 사용)
-- **UI:** Tailwind CSS v4를 사용한 스타일링
-- **린팅:** 코드 품질 관리를 위한 ESLint 9
+### Design & Style
+- Modern, dark theme using Tailwind CSS.
+- Responsive layout for mobile and web.
+- Interactive cards for demo selection.
+- Consistent header and navigation.
 
-### TensorFlow.js 통합
-- **TensorFlow 페이지:** 클라이언트 측에서 간단한 머신러닝 모델을 실행할 수 있는 `/tensorflow` 페이지.
+### TensorFlow.js Demos
+- **Simple Model:** Demonstrates a simple linear regression model running in the browser.
+- **Image Classification:** Classifies images using the `MobileNet` model.
+- **Object Detection:** Detects objects in an image using the `COCO-SSD` model.
+- **Face Detection:** Detects facial landmarks using the `FaceMesh` model.
+- **Toxicity Classification:** Classifies the toxicity of a sentence using the `Toxicity` model.
+- **Question & Answer:** Answers questions based on a context using the `MobileBERT` model.
+- **Speech Command Recognition:** Recognizes simple speech commands.
 
-### 프론트엔드 ROS 데모
-- **ROS 페이지:** `/ros` 경로에 `roslibjs`를 사용하여 외부 ROS 2 WebSocket 브리지와 통신하는 프론트엔드 애플리케이션을 구현했습니다.
+### ROS Demos
+- **Topic Viewer:** Shows how to view ROS topics in real-time.
 
-## 현재 계획: 메인 페이지 및 데모 구조 개편
+### React Demos
+- **useOptimistic Hook:** An example of using the `useOptimistic` hook from React 19.
 
-- **메인 페이지 카테고리 추가:**
-    - React 19, Tailwind CSS v4 카테고리를 메인 페이지에 추가합니다.
-    - TensorFlow.js 데모 설명을 "클라이언트 측 테스트만 가능"으로 수정합니다.
-    - ROS 데모 설명을 "roslibjs를 사용하여 ROS 브릿지와 실시간 통신"으로 명확히 합니다.
-- **데모 페이지 구조 변경:**
-    - 사용자가 "데모 보기"를 클릭하면, 각 카테고리별 데모 목록 페이지(`/demos/[category]`)로 이동합니다.
-    - 데모 목록에서 특정 항목을 클릭하면, 실제 데모 페이지(`/demos/[category]/[slug]`)로 이동하는 2단계 구조를 구현합니다.
-    - 기존 데모들을 새로운 경로 구조에 맞게 재배치하고, 신규 카테고리를 위한 예시 데모 페이지를 생성합니다.
+### Tailwind CSS Demos
+- **JIT Engine:** A demonstration of the new JIT engine in Tailwind CSS v4.
+
+## Current Plan: Expand ROS Demos
+
+The current plan is to expand the ROS demos to cover a wider range of ROS concepts and to integrate 2D and 3D visualization libraries.
+
+### Steps
+1.  **Update Demo List:** Add the new demos to the `ROS` category page.
+2.  **Service Caller:** Create a demo to call ROS services.
+3.  **Parameter Viewer:** Create a demo to view and manage ROS parameters.
+4.  **Action Caller:** Create a demo to interact with ROS actions.
+5.  **Dynamic Reconfiguration:** Create a demo for dynamic reconfiguration of ROS nodes.
+6.  **2D View:** Create a demo using `ros2djs` to display 2D visualizations, such as maps.
+7.  **3D View:** Create a demo using `ros3djs` to display 3D visualizations, such as robot models and point clouds.
+8.  **Install Libraries:** Install `ros2djs` and `ros3djs`.
