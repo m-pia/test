@@ -17,9 +17,7 @@ This project is a collection of demos for various web technologies, including Te
 - **Image Classification:** Classifies images using the `MobileNet` model.
 - **Object Detection:** Detects objects in an image using the `COCO-SSD` model.
 - **Face Detection:** Detects facial landmarks using the `FaceMesh` model.
-- **Toxicity Classification:** Classifies the toxicity of a sentence using the `Toxicity` model.
 - **Question & Answer:** Answers questions based on a context using the `MobileBERT` model.
-- **Speech Command Recognition:** Recognizes simple speech commands.
 
 ### ROS Demos
 - **Topic Viewer:** Shows how to view ROS topics in real-time.
