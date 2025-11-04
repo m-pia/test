@@ -5,7 +5,6 @@ const demos = {
     { slug: 'simple-model', title: '간단한 모델 실행', description: '브라우저에서 간단한 TensorFlow.js 모델을 실행합니다.' },
     { slug: 'image-classification', title: '이미지 분류', description: 'MobileNet 모델을 사용하여 이미지를 분석하고 분류합니다.' },
     { slug: 'object-detection', title: '객체 탐지', description: 'COCO-SSD 모델을 사용하여 이미지나 영상에서 객체를 탐지합니다.' },
-    { slug: 'face-detection', title: '안면 탐지', description: 'FaceMesh 모델을 활용하여 실시간으로 얼굴의 주요 특징점을 감지합니다.' },
     { slug: 'question-and-answer', title: '질의응답', description: 'MobileBERT 모델을 기반으로 주어진 문맥과 질문에 대한 답을 찾습니다.' },
   ],
   ros: [

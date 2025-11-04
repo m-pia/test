@@ -16,7 +16,6 @@ This project is a collection of demos for various web technologies, including Te
 - **Simple Model:** Demonstrates a simple linear regression model running in the browser.
 - **Image Classification:** Classifies images using the `MobileNet` model.
 - **Object Detection:** Detects objects in an image using the `COCO-SSD` model.
-- **Face Detection:** Detects facial landmarks using the `FaceMesh` model.
 - **Question & Answer:** Answers questions based on a context using the `MobileBERT` model.
 
 ### ROS Demos
@@ -28,16 +27,14 @@ This project is a collection of demos for various web technologies, including Te
 ### Tailwind CSS Demos
 - **JIT Engine:** A demonstration of the new JIT engine in Tailwind CSS v4.
 
-## Current Plan: Expand ROS Demos
+## Current Plan: Fix Module Not Found Errors
 
-The current plan is to expand the ROS demos to cover a wider range of ROS concepts and to integrate 2D and 3D visualization libraries.
+The current plan is to fix the module not found errors for `three` and `FaceMesh`.
 
 ### Steps
-1.  **Update Demo List:** Add the new demos to the `ROS` category page.
-2.  **Service Caller:** Create a demo to call ROS services.
-3.  **Parameter Viewer:** Create a demo to view and manage ROS parameters.
-4.  **Action Caller:** Create a demo to interact with ROS actions.
-5.  **Dynamic Reconfiguration:** Create a demo for dynamic reconfiguration of ROS nodes.
-6.  **2D View:** Create a demo using `ros2djs` to display 2D visualizations, such as maps.
-7.  **3D View:** Create a demo using `ros3djs` to display 3D visualizations, such as robot models and point clouds.
-8.  **Install Libraries:** Install `ros2djs` and `ros3djs`.
+1.  **Install `three.js`:** Install the `three` and `@types/three` packages.
+2.  **Remove `face-landmarks-detection`:** Remove the `@tensorflow-models/face-landmarks-detection` package to resolve version conflicts.
+3.  **Delete Face Detection Demo:** Delete the `face-detection` demo page.
+4.  **Update Demo List:** Remove the '안면 탐지' demo from the demo list.
+5.  **Update `blueprint.md`:** Document the changes in the blueprint.
+6.  **Run `npm install`:** Apply the changes by running `npm install`.
