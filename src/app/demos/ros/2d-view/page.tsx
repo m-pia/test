@@ -1,16 +1,16 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import ROSLIB from 'roslib';
-import { Viewer, OccupancyGridClient } from 'ros2d';
+
+declare const window: any;
 
 const Ros2dPage = () => {
-  const [ros, setRos] = useState<ROSLIB.Ros | null>(null);
+  const [ros, setRos] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
   const viewerRef = useRef<HTMLDivElement>(null);
 
   const connectToRos = () => {
-    const ros = new ROSLIB.Ros({
+    const ros = new window.ROSLIB.Ros({
       url: 'ws://localhost:9090',
     });
 
@@ -19,7 +19,7 @@ const Ros2dPage = () => {
       setRos(ros);
     });
 
-    ros.on('error', (error) => {
+    ros.on('error', (error: any) => {
       console.log('Error connecting to websocket server: ', error);
       setError('Error connecting to websocket server.');
     });
@@ -31,15 +31,15 @@ const Ros2dPage = () => {
   };
 
   useEffect(() => {
-    if (ros && viewerRef.current) {
-        viewerRef.current.innerHTML = ''
-      const viewer = new Viewer({
+    if (ros && viewerRef.current && window.ROS2D) {
+        viewerRef.current.innerHTML = '';
+      const viewer = new window.ROS2D.Viewer({
         divID: viewerRef.current.id,
         width: 800,
         height: 600,
       });
 
-      const gridClient = new OccupancyGridClient({
+      const gridClient = new window.ROS2D.OccupancyGridClient({
         ros,
         rootObject: viewer.scene,
         topic: '/map',

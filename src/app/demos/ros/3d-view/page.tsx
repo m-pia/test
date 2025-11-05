@@ -1,17 +1,16 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import ROSLIB from 'roslib';
-import * as THREE from 'three';
-import { Viewer, UrdfClient } from 'ros3d';
+
+declare const window: any;
 
 const Ros3dPage = () => {
-  const [ros, setRos] = useState<ROSLIB.Ros | null>(null);
+  const [ros, setRos] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
   const viewerRef = useRef<HTMLDivElement>(null);
 
   const connectToRos = () => {
-    const ros = new ROSLIB.Ros({
+    const ros = new window.ROSLIB.Ros({
       url: 'ws://localhost:9090',
     });
 
@@ -20,7 +19,7 @@ const Ros3dPage = () => {
       setRos(ros);
     });
 
-    ros.on('error', (error) => {
+    ros.on('error', (error: any) => {
       console.log('Error connecting to websocket server: ', error);
       setError('Error connecting to websocket server.');
     });
@@ -32,10 +31,10 @@ const Ros3dPage = () => {
   };
 
   useEffect(() => {
-    if (ros && viewerRef.current) {
+    if (ros && viewerRef.current && window.ROS3D) {
         viewerRef.current.innerHTML = '';
 
-      const viewer = new Viewer({
+      const viewer = new window.ROS3D.Viewer({
         divID: viewerRef.current.id,
         width: 800,
         height: 600,
@@ -44,10 +43,10 @@ const Ros3dPage = () => {
       });
 
       // Add a grid.
-      viewer.addObject(new THREE.GridHelper(10, 10));
+      viewer.addObject(new window.ROS3D.Grid());
 
       // Setup a client to listen to TFs.
-      const tfClient = new ROSLIB.TFClient({
+      const tfClient = new window.ROSLIB.TFClient({
         ros,
         angularThres: 0.01,
         transThres: 0.01,
@@ -56,18 +55,11 @@ const Ros3dPage = () => {
       });
 
       // Setup the URDF client.
-      const urdfClient = new UrdfClient({
+      const urdfClient = new window.ROS3D.UrdfClient({
         ros,
         tfClient,
         path: 'http://localhost:8000/pr2.urdf', // This needs to be a path to a valid URDF file
         rootObject: viewer.scene,
-        loader: (path, onComplete) => {
-            // A custom loader can be used here if needed
-            const loader = new THREE.FileLoader();
-            loader.load(path, (data) => {
-                onComplete(new DOMParser().parseFromString(data as string, 'text/xml'));
-            });
-        }
       });
 
     }

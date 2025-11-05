@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
+import Script from 'next/script';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -38,6 +39,10 @@ export default function RootLayout({
             © 2025 Tech Testbed. All rights reserved.
           </div>
         </footer>
+        <Script src="https://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js" />
+        <Script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js" />
+        <Script src="https://static.robotwebtools.org/ros2djs/current/ros2d.min.js" />
+        <Script src="https://static.robotwebtools.org/ros3djs/current/ros3d.min.js" />
       </body>
     </html>
   );
