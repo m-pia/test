@@ -68,7 +68,7 @@ const DynamicReconfigurationPage = () => {
 
     service.callService(request, (result: unknown) => {
         console.log("Parameters updated successfully", result);
-    }, (error: Error) => {
+    }, (error: string) => {
         console.error("Failed to update parameters", error);
         setError("Failed to update parameters. Check the console for details.");
     });

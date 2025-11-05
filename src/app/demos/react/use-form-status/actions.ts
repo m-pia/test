@@ -1,6 +1,6 @@
 'use server';
 
-export async function submitForm(formData: FormData): Promise<{ message: string }> {
+export async function submitForm(prevState: { message: string | null }, formData: FormData): Promise<{ message: string }> {
   const email = formData.get('email') as string;
 
   // Simulate a longer network delay

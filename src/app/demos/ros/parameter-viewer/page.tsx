@@ -54,8 +54,10 @@ const ParameterViewerPage = () => {
     if (!ros || !selectedParam) return;
     const param = new ROSLIB.Param({ ros, name: selectedParam });
     try {
-        param.set(JSON.parse(newValue));
-        getParamValue(selectedParam); // Refresh the value
+        param.set(JSON.parse(newValue), () => {
+            console.log('Parameter set successfully');
+            getParamValue(selectedParam); // Refresh the value
+        });
     } catch {
         setError("Invalid JSON format for parameter value.")
     }

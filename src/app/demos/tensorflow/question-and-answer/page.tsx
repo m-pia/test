@@ -12,7 +12,7 @@ const QnAPage = () => {
     'It provides a low-level API for building models from scratch and a high-level API for using pre-trained models.'
   );
   const [question, setQuestion] = useState('What can developers do with TensorFlow.js?');
-  const [answers, setAnswers] = useState<qna.Answer[] | null>(null);
+  const [answers, setAnswers] = useState<{ text: string; score: number; startIndex: number; endIndex: number; }[] | null>(null);
 
   useEffect(() => {
     const loadModel = async () => {

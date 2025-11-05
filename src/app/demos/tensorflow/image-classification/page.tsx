@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 const ImageClassificationPage = () => {
   const [model, setModel] = useState<mobilenet.MobileNet | null>(null);
-  const [predictions, setPredictions] = useState<mobilenet.MobileNetPrediction[] | null>(null);
+  const [predictions, setPredictions] = useState<{'className': string, 'probability': number}[] | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 

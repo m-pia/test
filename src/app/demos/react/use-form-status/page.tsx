@@ -1,6 +1,6 @@
 'use client';
 
-import { useFormStatus } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 import { submitForm } from './actions';
 
 // A custom SubmitButton component that uses useFormStatus
@@ -29,14 +29,20 @@ function SubmitButton() {
   );
 }
 
+const initialState: { message: string | null } = {
+  message: null,
+};
+
 export default function UseFormStatusPage() {
+  const [state, formAction] = useFormState(submitForm, initialState);
+
   return (
     <div className="bg-gray-900 text-white min-h-screen p-8 flex items-center justify-center">
       <div className="max-w-md w-full bg-gray-800 p-8 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold mb-4 text-center">useFormStatus 데모</h1>
         <p className="text-gray-400 mb-8 text-center">폼 제출 시 버튼의 상태가 어떻게 변하는지 확인해보세요.</p>
         
-        <form action={submitForm}>
+        <form action={formAction}>
           <div className="mb-6">
             <label htmlFor="email" className="block text-lg font-medium mb-2">이메일</label>
             <input 
@@ -50,6 +56,12 @@ export default function UseFormStatusPage() {
           </div>
           <SubmitButton />
         </form>
+
+        {state?.message && (
+          <div className="mt-6 p-4 rounded-lg bg-gray-700 animate-fade-in">
+            <p className="text-lg text-green-400 text-center">{state.message}</p>
+          </div>
+        )}
 
         <p className="text-sm text-gray-500 mt-6 text-center">
           폼을 제출하면 1.5초의 딜레이 후 처리됩니다. <br/> 이 시간 동안 `useFormStatus`의 `pending` 상태를 관찰할 수 있습니다.
