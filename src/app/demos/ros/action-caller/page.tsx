@@ -7,8 +7,8 @@ const ActionCallerPage = () => {
   const [ros, setRos] = useState<ROSLIB.Ros | null>(null);
   const [serverName, setServerName] = useState('/fibonacci');
   const [goalData, setGoalData] = useState('{ "order": 7 }');
-  const [feedback, setFeedback] = useState<any | null>(null);
-  const [result, setResult] = useState<any | null>(null);
+  const [feedback, setFeedback] = useState<Record<string, unknown> | null>(null);
+  const [result, setResult] = useState<Record<string, unknown> | null>(null);
   const [status, setStatus] = useState<string>('Not connected');
   const [error, setError] = useState<string | null>(null);
   const goalRef = useRef<ROSLIB.Goal | null>(null);
@@ -24,7 +24,7 @@ const ActionCallerPage = () => {
       setStatus('Connected');
     });
 
-    ros.on('error', (error) => {
+    ros.on('error', (error: Error) => {
       console.log('Error connecting to websocket server: ', error);
       setError('Error connecting to websocket server.');
       setStatus('Error');
@@ -76,7 +76,7 @@ const ActionCallerPage = () => {
       goalRef.current = goal;
       setStatus('Goal sent');
       setError(null);
-    } catch (e) {
+    } catch {
       setError('Invalid JSON format for goal data.');
     }
   };

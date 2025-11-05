@@ -30,7 +30,6 @@ export default function UseApiPage() {
               </div>
             }
           >
-            {/* @ts-expect-error Server Component is passing a promise to a Client Component. This is the intended behavior for this demo. */}
             <Message message={messagePromise} />
           </Suspense>
         </div>
@@ -38,7 +37,7 @@ export default function UseApiPage() {
         {/* Section 2: Using use() with Context */}
         <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold mb-4">2. `use`로 컨텍스트 사용하기</h2>
-          <p className="text-gray-400 mb-6">`use` API는 `useContext`와 달리 조건문이나 반복문 안에서도 호출할 수 있어 더 유연합니다. 아래 예제에서는 테마가 'dark'일 때만 언어 컨텍스트를 사용합니다.</p>
+          <p className="text-gray-400 mb-6">`use` API는 `useContext`와 달리 조건문이나 반복문 안에서도 호출할 수 있어 더 유연합니다. 아래 예제에서는 테마가 &apos;dark&apos;일 때만 언어 컨텍스트를 사용합니다.</p>
           <ThemeProviderComponent />
         </div>
       </div>

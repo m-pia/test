@@ -1,16 +1,44 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import ROSLIB from 'roslib';
 
-declare const window: any;
+// Define basic interfaces for ROS3D objects to avoid using 'any'
+type Ros3dObject = object;
+
+interface Ros3dViewer {
+  addObject(object: Ros3dObject): void;
+  scene: Ros3dObject;
+}
+
+declare global {
+    interface Window {
+        ROS3D: {
+            Viewer: new (options: {
+                divID: string;
+                width: number;
+                height: number;
+                antialias: boolean;
+                background: string;
+            }) => Ros3dViewer;
+            Grid: new () => Ros3dObject;
+            UrdfClient: new (options: {
+                ros: ROSLIB.Ros;
+                tfClient: ROSLIB.TFClient;
+                path: string;
+                rootObject: Ros3dObject;
+            }) => unknown;
+        };
+    }
+}
 
 const Ros3dPage = () => {
-  const [ros, setRos] = useState<any | null>(null);
+  const [ros, setRos] = useState<ROSLIB.Ros | null>(null);
   const [error, setError] = useState<string | null>(null);
   const viewerRef = useRef<HTMLDivElement>(null);
 
   const connectToRos = () => {
-    const ros = new window.ROSLIB.Ros({
+    const ros = new ROSLIB.Ros({
       url: 'ws://localhost:9090',
     });
 
@@ -19,7 +47,7 @@ const Ros3dPage = () => {
       setRos(ros);
     });
 
-    ros.on('error', (error: any) => {
+    ros.on('error', (error: Error) => {
       console.log('Error connecting to websocket server: ', error);
       setError('Error connecting to websocket server.');
     });
@@ -46,7 +74,7 @@ const Ros3dPage = () => {
       viewer.addObject(new window.ROS3D.Grid());
 
       // Setup a client to listen to TFs.
-      const tfClient = new window.ROSLIB.TFClient({
+      const tfClient = new ROSLIB.TFClient({
         ros,
         angularThres: 0.01,
         transThres: 0.01,
@@ -55,7 +83,7 @@ const Ros3dPage = () => {
       });
 
       // Setup the URDF client.
-      const urdfClient = new window.ROS3D.UrdfClient({
+      new window.ROS3D.UrdfClient({
         ros,
         tfClient,
         path: 'http://localhost:8000/pr2.urdf', // This needs to be a path to a valid URDF file

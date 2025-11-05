@@ -7,7 +7,7 @@ const ServiceCallerPage = () => {
   const [ros, setRos] = useState<ROSLIB.Ros | null>(null);
   const [serviceName, setServiceName] = useState('/add_two_ints');
   const [requestData, setRequestData] = useState('{ "a": 1, "b": 2 }');
-  const [response, setResponse] = useState<any | null>(null);
+  const [response, setResponse] = useState<Record<string, unknown> | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const connectToRos = () => {
@@ -20,7 +20,7 @@ const ServiceCallerPage = () => {
       setRos(ros);
     });
 
-    ros.on('error', (error) => {
+    ros.on('error', (error: Error) => {
       console.log('Error connecting to websocket server: ', error);
       setError('Error connecting to websocket server.');
     });
@@ -46,13 +46,13 @@ const ServiceCallerPage = () => {
       });
 
       service.callService(request, (result) => {
-        setResponse(result);
+        setResponse(result as Record<string, unknown>);
         setError(null);
       }, (error) => {
         setError(error);
         setResponse(null);
       });
-    } catch (e) {
+    } catch {
       setError('Invalid JSON format for request data.');
     }
   };

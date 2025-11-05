@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Resizable } from 'react-resizable';
+import Image from 'next/image';
 
 export default function ContainerQueriesPage() {
   const [width, setWidth] = useState(600);
@@ -27,10 +28,12 @@ export default function ContainerQueriesPage() {
                 {/* The card that responds to the container's size */}
                 <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden @lg:flex">
                     {/* Image section */}
-                    <div className="@lg:w-1/3">
-                        <img 
+                    <div className="@lg:w-1/3 relative">
+                        <Image 
                             src="https://images.unsplash.com/photo-1682687220247-9f786e34d472?q=80&w=800&auto=format&fit=crop" 
                             alt="Desert landscape" 
+                            layout="fill"
+                            objectFit="cover"
                             className="w-full h-48 @lg:h-full object-cover"
                         />
                     </div>

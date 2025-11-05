@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ROSLIB from 'roslib';
 
 const ParameterViewerPage = () => {
   const [ros, setRos] = useState<ROSLIB.Ros | null>(null);
   const [params, setParams] = useState<string[]>([]);
   const [selectedParam, setSelectedParam] = useState<string | null>(null);
-  const [paramValue, setParamValue] = useState<any | null>(null);
+  const [paramValue, setParamValue] = useState<Record<string, unknown> | null>(null);
   const [newValue, setNewValue] = useState('');
   const [error, setError] = useState<string | null>(null);
 
@@ -22,7 +22,7 @@ const ParameterViewerPage = () => {
       getParams(ros);
     });
 
-    ros.on('error', (error) => {
+    ros.on('error', (error: Error) => {
       console.log('Error connecting to websocket server: ', error);
       setError('Error connecting to websocket server.');
     });
@@ -44,7 +44,7 @@ const ParameterViewerPage = () => {
     if (!ros) return;
     const param = new ROSLIB.Param({ ros, name: paramName });
     param.get((value) => {
-      setParamValue(value);
+      setParamValue(value as Record<string, unknown>);
       setNewValue(JSON.stringify(value));
       setSelectedParam(paramName);
     });
@@ -56,7 +56,7 @@ const ParameterViewerPage = () => {
     try {
         param.set(JSON.parse(newValue));
         getParamValue(selectedParam); // Refresh the value
-    } catch (e) {
+    } catch {
         setError("Invalid JSON format for parameter value.")
     }
   };

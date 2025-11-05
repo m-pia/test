@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
+import Image from 'next/image';
 
 const ImageClassificationPage = () => {
   const [model, setModel] = useState<mobilenet.MobileNet | null>(null);
@@ -54,7 +55,7 @@ const ImageClassificationPage = () => {
         <input type="file" accept="image/*" onChange={handleImageChange} className="mb-4" />
         {imageUrl && (
           <div className="flex flex-col items-center">
-            <img ref={imageRef} src={imageUrl} alt="Uploaded" className="max-w-sm rounded-lg shadow-lg" />
+            <Image ref={imageRef} src={imageUrl} alt="Uploaded" width={500} height={300} className="max-w-sm rounded-lg shadow-lg" />
             <button onClick={handleClassify} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
               Classify Image
             </button>

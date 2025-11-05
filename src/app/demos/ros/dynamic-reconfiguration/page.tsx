@@ -1,11 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ROSLIB from 'roslib';
+
+interface RosParameter {
+  name: string;
+  type: 'double' | 'bool';
+  value: number | boolean;
+  min?: number;
+  max?: number;
+}
 
 const DynamicReconfigurationPage = () => {
   const [ros, setRos] = useState<ROSLIB.Ros | null>(null);
-  const [params, setParams] = useState<any[]>([]);
+  const [params, setParams] = useState<RosParameter[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const connectToRos = () => {
@@ -24,7 +32,7 @@ const DynamicReconfigurationPage = () => {
       ]);
     });
 
-    ros.on('error', (error) => {
+    ros.on('error', (error: Error) => {
       console.log('Error connecting to websocket server: ', error);
       setError('Error connecting to websocket server.');
     });
@@ -36,7 +44,7 @@ const DynamicReconfigurationPage = () => {
     });
   };
 
-  const handleParamChange = (name: string, value: any) => {
+  const handleParamChange = (name: string, value: number | boolean) => {
     if (!ros) return;
 
     const updatedParams = params.map(p => p.name === name ? { ...p, value } : p);
@@ -58,9 +66,9 @@ const DynamicReconfigurationPage = () => {
         }
     });
 
-    service.callService(request, (result) => {
+    service.callService(request, (result: unknown) => {
         console.log("Parameters updated successfully", result);
-    }, (error) => {
+    }, (error: Error) => {
         console.error("Failed to update parameters", error);
         setError("Failed to update parameters. Check the console for details.");
     });
@@ -90,7 +98,7 @@ const DynamicReconfigurationPage = () => {
                     min={param.min}
                     max={param.max}
                     step="0.01"
-                    value={param.value}
+                    value={param.value as number}
                     onChange={(e) => handleParamChange(param.name, parseFloat(e.target.value))}
                     className="w-full"
                   />
@@ -99,7 +107,7 @@ const DynamicReconfigurationPage = () => {
                   <input
                     type="checkbox"
                     id={param.name}
-                    checked={param.value}
+                    checked={param.value as boolean}
                     onChange={(e) => handleParamChange(param.name, e.target.checked)}
                   />
                 )}

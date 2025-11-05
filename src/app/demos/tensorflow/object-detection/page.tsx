@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import * as cocoSsd from '@tensorflow-models/coco-ssd';
+import Image from 'next/image';
 
 const ObjectDetectionPage = () => {
   const [model, setModel] = useState<cocoSsd.ObjectDetection | null>(null);
@@ -86,7 +87,7 @@ const ObjectDetectionPage = () => {
         <input type="file" accept="image/*" onChange={handleImageChange} className="mb-4" />
         {imageUrl && (
           <div className="relative flex flex-col items-center">
-            <img ref={imageRef} src={imageUrl} alt="Uploaded" className="max-w-sm rounded-lg shadow-lg" onLoad={() => setPredictions(null)} />
+            <Image ref={imageRef} src={imageUrl} alt="Uploaded" width={500} height={300} className="max-w-sm rounded-lg shadow-lg" onLoad={() => setPredictions(null)} />
             <canvas ref={canvasRef} className="absolute top-0 left-0" />
             <button onClick={handleDetect} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
               Detect Objects
